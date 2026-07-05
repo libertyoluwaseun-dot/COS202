@@ -1,52 +1,62 @@
+# COS202 Personal Pocket CGPA Calculator (PPC)
 
-def calculator():
-    print("=================================")
-    print("     MATHEMATICAL CALCULATOR")
-    print("=================================")
+print("========================================")
+print("   PERSONAL POCKET CGPA CALCULATOR")
+print("========================================")
 
-    while True:
-        print("\nChoose an operation")
-        print("1. Addition (+)")
-        print("2. Subtraction (-)")
-        print("3. Multiplication (*)")
-        print("4. Division (/)")
-        print("5. Modulus (%)")
-        print("6. Clear Screen")
-        print("7. OFF")
+num_courses = int(input("Enter the number of courses: "))
 
-        choice = input("Enter your choice (1-7): ")
+total_points = 0
+total_units = 0
 
-        if choice == "7":
-            print("Calculator is OFF. Goodbye!")
-            break
+for i in range(1, num_courses + 1):
+    print("\nCourse", i)
 
-        elif choice == "6":
-            print("\n" * 50)
-            continue
+    course = input("Course Title: ")
+    unit = int(input("Course Unit: "))
+    grade = input("Grade (A-F): ").upper()
 
-        elif choice in ["1", "2", "3", "4", "5"]:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
+    if grade == "A":
+        point = 5
+    elif grade == "B":
+        point = 4
+    elif grade == "C":
+        point = 3
+    elif grade == "D":
+        point = 2
+    elif grade == "E":
+        point = 1
+    elif grade == "F":
+        point = 0
+    else:
+        print("Invalid Grade!")
+        point = 0
 
-            if choice == "1":
-                print("Result =", num1 + num2)
+    quality_point = point * unit
 
-            elif choice == "2":
-                print("Result =", num1 - num2)
+    total_points += quality_point
+    total_units += unit
 
-            elif choice == "3":
-                print("Result =", num1 * num2)
+if total_units > 0:
+    cgpa = total_points / total_units
 
-            elif choice == "4":
-                if num2 == 0:
-                    print("Error! Division by zero is not allowed.")
-                else:
-                    print("Result =", num1 / num2)
+    print("\n========================================")
+    print("TOTAL COURSE UNITS :", total_units)
+    print("TOTAL GRADE POINTS :", total_points)
+    print("YOUR CGPA IS :", round(cgpa, 2))
 
-            elif choice == "5":
-                print("Result =", num1 % num2)
+    if cgpa >= 4.50:
+        print("CLASS OF DEGREE: First Class")
+    elif cgpa >= 3.50:
+        print("CLASS OF DEGREE: Second Class Upper")
+    elif cgpa >= 2.40:
+        print("CLASS OF DEGREE: Second Class Lower")
+    elif cgpa >= 1.50:
+        print("CLASS OF DEGREE: Third Class")
+    elif cgpa >= 1.00:
+        print("CLASS OF DEGREE: Pass")
+    else:
+        print("CLASS OF DEGREE: Fail")
 
-        else:
-            print("Invalid choice. Try again.")
-
-calculator()
+print("========================================")
+print("Thank you for using PPC!")
